@@ -76,7 +76,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P18-Xr-X0P">
-                                                    <rect key="frame" x="15" y="4" width="288" height="34"/>
+                                                    <rect key="frame" x="15" y="4" width="289" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -142,6 +142,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Ub8-CJ-Sl2">
                             <connections>
                                 <action selector="saveButtonPressed:" destination="IDk-Q2-Fx2" id="4Yv-pw-EWy"/>
+                                <segue destination="28P-cF-ePt" kind="unwind" unwindAction="unwindFromDetailWithSegue:" id="zVc-7Q-Lxz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -153,6 +154,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3PH-RJ-Tfx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="28P-cF-ePt" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3112.5" y="116.19718309859155"/>
         </scene>
