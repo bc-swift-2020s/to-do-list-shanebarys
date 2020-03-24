@@ -6,11 +6,11 @@
 //  Copyright © 2020 Shane Barys. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import UserNotifications
 
 struct LocalNotificationManager {
-    static func authorizeLocalNotifications() {
+    static func authorizeLocalNotifications(viewController: UIViewController) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             guard error == nil else {
                 print("ERROR \(error?.localizedDescription)")
@@ -20,12 +20,34 @@ struct LocalNotificationManager {
                 print("Notification authorization granted")
             } else {
                 print("User has denied notifications")
-                //TODO: put an alert in here telling the user what to do
+                
+                DispatchQueue.main.async {
+                    viewController.oneButtonAlert(title: "User Has Not Allowed Notifications", message: "To receive alerts for reminders, open the Settings app, select To Do List > Notifications > Allow Notifications")
+            
+                }
             }
         }
     }
     
-   static func setCalendarNotification(title: String, subtitle: String, body: String, badgeNumber: NSNumber?, sound: UNNotificationSound?, date: Date) -> String {
+    static func isAuthorized(completed: @escaping (Bool) -> () ) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            guard error == nil else {
+                print("ERROR \(error?.localizedDescription)")
+                completed(false)
+                return
+            }
+            if granted {
+                print("Notification authorization granted")
+                completed(true)
+            } else {
+                print("User has denied notifications")
+                completed(false)
+            }
+        }
+    }
+    
+    
+    static func setCalendarNotification(title: String, subtitle: String, body: String, badgeNumber: NSNumber?, sound: UNNotificationSound?, date: Date) -> String {
         //create content
         let content = UNMutableNotificationContent()
         content.title = title
@@ -54,6 +76,6 @@ struct LocalNotificationManager {
         return notificationID
     }
     
-
+    
     
 }
